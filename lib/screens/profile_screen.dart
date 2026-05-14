@@ -5,17 +5,13 @@ class ProfileScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // Custom Colors
-    const Color bgColor = Color(0xFFF5F5F5);
-    const Color highlightColor = Color(0xFF07CEEB);
-    const Color primaryColor = Color(0xFF006579);
+    final theme = Theme.of(context);
+    final primaryColor = theme.colorScheme.primary;
+    final secondaryColor = theme.colorScheme.secondary;
 
     return Scaffold(
-      backgroundColor: bgColor,
       appBar: AppBar(
         title: const Text('My Profile'),
-        backgroundColor: primaryColor,
-        foregroundColor: Colors.white,
         centerTitle: true,
       ),
       body: SingleChildScrollView(
@@ -26,11 +22,11 @@ class ProfileScreen extends StatelessWidget {
             const SizedBox(height: 20),
 
             // CircleAvatar with Initials
-            const CircleAvatar(
+            CircleAvatar(
               radius: 60,
-              backgroundColor: highlightColor,
+              backgroundColor: secondaryColor,
               child: Text(
-                'LP', // Replace with your Initials
+                'LP',
                 style: TextStyle(
                   fontSize: 40,
                   fontWeight: FontWeight.bold,
@@ -43,23 +39,23 @@ class ProfileScreen extends StatelessWidget {
 
             // Personal Info Section
             Text(
-              'Lifoter Prosper', // Replace with your Full Name
+              'Lifoter Prosper',
               style: TextStyle(
                 fontSize: 28,
                 fontWeight: FontWeight.bold,
                 color: primaryColor,
               ),
             ),
-            const Text(
-              'Student ID: LMUI2637020', // Replace with your Student ID
-              style: TextStyle(fontSize: 16, color: primaryColor),
+            Text(
+              'Student ID: LMUI2637020',
+              style: TextStyle(fontSize: 16, color: primaryColor.withOpacity(0.8)),
             ),
-            const Text(
-              'BTECH in Software Engineering', // Replace with your Programme
+            Text(
+              'BTECH in Software Engineering',
               style: TextStyle(
                 fontSize: 16,
                 fontStyle: FontStyle.italic,
-                color: primaryColor,
+                color: primaryColor.withOpacity(0.8),
               ),
             ),
 
@@ -72,8 +68,15 @@ class ProfileScreen extends StatelessWidget {
                 color: Colors.white,
                 borderRadius: BorderRadius.circular(15),
                 border: Border.all(color: primaryColor.withOpacity(0.2)),
+                boxShadow: [
+                  BoxShadow(
+                    color: Colors.black.withOpacity(0.05),
+                    blurRadius: 10,
+                    offset: const Offset(0, 5),
+                  ),
+                ],
               ),
-              child: const Column(
+              child: Column(
                 children: [
                   Text(
                     'Personal Bio',
@@ -83,11 +86,11 @@ class ProfileScreen extends StatelessWidget {
                       fontSize: 18,
                     ),
                   ),
-                  Divider(color: highlightColor),
+                  Divider(color: secondaryColor),
                   Text(
-                    'I am a passionate developer currently exploring the world of mobile applications with Flutter. I enjoy solving complex logic problems and design-driven development.', // Replace with your 2-3 sentence bio
+                    'I am a passionate developer currently exploring the world of mobile applications with Flutter. I enjoy solving complex logic problems and design-driven development.',
                     textAlign: TextAlign.center,
-                    style: TextStyle(color: primaryColor, height: 1.5),
+                    style: TextStyle(color: primaryColor.withOpacity(0.9), height: 1.5),
                   ),
                 ],
               ),
@@ -110,16 +113,15 @@ class ProfileScreen extends StatelessWidget {
             const SizedBox(height: 10),
 
             // Goal List Items
-            _buildGoalItem('1. Master Flutter State Management', highlightColor, primaryColor),
-            _buildGoalItem('2. Maintain a GPA above 3.8', highlightColor, primaryColor),
-            _buildGoalItem('3. Complete 2 side projects for my portfolio', highlightColor, primaryColor),
+            _buildGoalItem('1. Master Flutter State Management', secondaryColor, primaryColor),
+            _buildGoalItem('2. Maintain a GPA above 3.8', secondaryColor, primaryColor),
+            _buildGoalItem('3. Complete 2 side projects for my portfolio', secondaryColor, primaryColor),
           ],
         ),
       ),
     );
   }
 
-  // Helper widget to make goal items look unique
   Widget _buildGoalItem(String goal, Color bulletColor, Color textColor) {
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 8.0),

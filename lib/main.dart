@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-import 'screens/task_list_screen.dart';
-import 'screens/profile_screen.dart';
+import 'screens/main_screen.dart';
 
 void main() {
   runApp(const TaskManagerApp());
@@ -11,34 +10,40 @@ class TaskManagerApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    const Color primaryColor = Color(0xFF006579);
+    const Color secondaryColor = Color(0xFF07CEEB);
+    const Color backgroundColor = Color(0xFFF5F5F5);
+
     return MaterialApp(
-      // Task 1.1: Disable the debug banner
       debugShowCheckedModeBanner: false,
-
       title: 'Task Manager',
-
-      // Task 1.1: Create a MaterialApp with a custom theme
-      // Using ColorScheme.fromSeed is the modern way to set a theme in Flutter (Material 3)
       theme: ThemeData(
         useMaterial3: true,
+        scaffoldBackgroundColor: backgroundColor,
         colorScheme: ColorScheme.fromSeed(
-          seedColor: const Color(0xFF006579), // Deep Purple custom seed
-          primary: const Color(0xFF07CEEB),
-          secondary: const Color(0xFF625B71),
-          surface: const Color(0xFFF5F5F5),
+          seedColor: primaryColor,
+          primary: primaryColor,
+          secondary: secondaryColor,
+          surface: backgroundColor,
         ),
-        // You can also customize individual component themes here
         appBarTheme: const AppBarTheme(
-          backgroundColor: Color(0xFF006579),
+          backgroundColor: primaryColor,
           foregroundColor: Colors.white,
           elevation: 0,
+          centerTitle: true,
+        ),
+        floatingActionButtonTheme: const FloatingActionButtonThemeData(
+          backgroundColor: secondaryColor,
+          foregroundColor: Colors.white,
+        ),
+        elevatedButtonTheme: ElevatedButtonThemeData(
+          style: ElevatedButton.styleFrom(
+            backgroundColor: secondaryColor,
+            foregroundColor: Colors.white,
+          ),
         ),
       ),
-
-      // Task 1.1: Set the home screen to your Task List Screen
-      // In main.dart
-      home: const TaskListScreen()
-      // home: const ProfileScreen(), // Import this file at the top
+      home: const MainScreen(),
     );
   }
 }
